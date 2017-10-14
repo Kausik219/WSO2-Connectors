@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<template name="retrieveContact" xmlns="http://ws.apache.org/ns/synapse">
+	<parameter name="contactType" description="The contact_type of the Contact that should be returned from the endpoint"/>
+    <parameter name="name" description=" The name that you wish to search for."/>
+	<parameter name="email" description="The email address you wish to filter the contacts by"/>
+    <parameter name="phone" description="The phone number you wish to filter the contacts"/>
+	<parameter name="active" description="Only returns contacts whose active flag match the specified value"/>
+    <parameter name="householdTitle" description="The household title you wish to filter the household title
+Choices"/>
+	<parameter name="type" description="The type of the Contact that should be returned from the endpoint"/>
+    <parameter name="order" description="The order that the contacts should be returned in
+Choices"/>
+   <sequence>
+		<property name="contactType" expression="$func:contactType"/>
+        <property name="name" expression="$func:name"/>
+		<property name="email" expression="$func:email"/>
+        <property name="phone" expression="$func:phone"/>
+		<property name="active" expression="$func:active"/>
+        <property name="householdTitle" expression="$func:householdTitle"/>
+		<property name="type" expression="$func:type"/>
+        <property name="order" expression="$func:order"/>
+        <call>
+            <endpoint>
+                <http method="get"
+                      uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/{uri.var.contactType}/{uri.var.name}/{uri.var.email}/{uri.var.phone}/{uri.var.active}/{uri.var.householdTitle}/{uri.var.type}/{uri.var.order}/contacts"/>
+            </endpoint>
+        </call>
+
+    </sequence>
+</template>
+

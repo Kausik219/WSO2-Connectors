@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="updateEventById"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.eventId)" name="eventId"/>
+		 <property expression="json-eval($.title)" name="title"/>
+         <property expression="json-eval($.startsAt)" name="startsAt"/>
+		 <property expression="json-eval($.endsAt)" name="endsAt"/>
+		 <property expression="json-eval($.repeats)" name="repeats"/>
+         <property expression="json-eval($.eventCategory)" name="eventCategory"/>
+         <property expression="json-eval($.allDay)" name="allDay"/>
+         <property expression="json-eval($.location)" name="location"/>
+		 <property expression="json-eval($.description)" name="description"/>
+         <property expression="json-eval($.state)" name="state"/>
+		 <property expression="json-eval($.visibleTo)" name="visibleTo"/>
+		 <property expression="json-eval($.emailInvitees)" name="emailInvitees"/>
+         <property expression="json-eval($.linkedTo)" name="linkedTo"/>
+		 <property expression="json-eval($.invitees)" name="invitees"/>
+		
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.updateEventById>
+            <eventId>{$ctx:eventId}</eventId>
+			<title>{$ctx:title}</title>
+			<startsAt>{$ctx:startsAt}</startsAt>
+			<endsAt>{$ctx:endsAt}</endsAt>
+			<repeats>{$ctx:repeats}</repeats>
+			<eventCategory>{$ctx:eventCategory}</eventCategory>
+			<allDay>{$ctx:allDay}</allDay>
+			<location>{$ctx:location}</location>
+			<description>{$ctx:description}</description>
+			<state>{$ctx:state}</state>
+			<visibleTo>{$ctx:visibleTo}</visibleTo>
+			<emailInvitees>{$ctx:emailInvitees}</emailInvitees>
+			<linkedTo>{$ctx:linkedTo}</linkedTo>
+			<invitees>{$ctx:invitees}</invitees>
+			
+         </wealthboxCrm.updateEventById>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                

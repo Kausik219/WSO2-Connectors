@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="retrieveComments"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+		 <property expression="json-eval($.resourceId)" name="resourceId"/>
+         <property expression="json-eval($.resourceType)" name="resourceType"/>
+         
+		 
+		 		 
+		 <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+         
+		 <wealthboxCrm.retrieveComments>
+			<resourceId>{$ctx:resourceId}</resourceId>
+            <resourceType>{$ctx:resourceType}</resourceType>
+		 </wealthboxCrm.retrieveComments>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+     

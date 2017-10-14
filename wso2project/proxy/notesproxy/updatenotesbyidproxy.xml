@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="updateNotesById"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.content)" name="content"/>
+		 <property expression="json-eval($.linkedTo)" name="linkedTo"/>
+		 <property expression="json-eval($.visibleTo)" name="visibleTo"/>
+		 <property expression="json-eval($.tags)" name="tags"/>
+         
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.updateNotesById>
+            <content>{$ctx:content}</content>
+			<linkedTo>{$ctx:linkedTo}</linkedTo>
+			<visibleTo>{$ctx:visibleTo}</visibleTo>
+			<tags>{$ctx:tags}</tags>
+         </wealthboxCrm.updateNotesById>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                

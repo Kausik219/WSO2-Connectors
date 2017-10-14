@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="retrieveContact"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+		 <property expression="json-eval($.contactType)" name="contactType"/>
+         <property expression="json-eval($.email)" name="email"/>
+         <property expression="json-eval($.phone)" name="phone"/>
+		 <property expression="json-eval($.active)" name="active"/>
+		 <property expression="json-eval($.householdTitle)" name="householdTitle"/>
+         <property expression="json-eval($.type)" name="type"/>
+         <property expression="json-eval($.order)" name="order"/>
+		 
+		 		 
+		 <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+         
+		 <wealthboxCrm.retrieveContact>
+			<contactType>{$ctx:contactType}</contactType>
+            <name>{$ctx:name}</name>
+			<email>{$ctx:email}</email>
+			<phone>{$ctx:phone}</phone>
+			<active>{$ctx:active}</active>
+            <householdTitle>{$ctx:householdTitle}</householdTitle>
+			<type>{$ctx:type}</type>
+			<order>{$ctx:order}</order>
+		 </wealthboxCrm.retrieveContact>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+     

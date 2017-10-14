@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<template name="updateProjectById" xmlns="http://ws.apache.org/ns/synapse">
+	<parameter name="projectId" description="The id of the project to be updated"/>
+	<parameter name="name" description="The name of the project being returned"/>
+	<parameter name="description" description="A short explaination of the project being returned"/>
+	<parameter name="customFields" description="An array of the custom fields that are to be set on this object"/>
+	<parameter name="organizer" description="The id of the user who is responsible for organizating the project"/>
+	<parameter name="visibleTo" description="The user group which is able to view the resource being created"/>
+	
+   <sequence>
+		<property name="uri.var.projectId" expression="$func:projectId"/>
+		<property name="name" expression="$func:name"/>
+		<property name="description" expression="$func:description"/>
+		<property name="customFields" expression="$func:customFields"/>
+		<property name="organizer" expression="$func:organizer"/>
+		<property name="visibleTo" expression="$func:visibleTo"/>
+		
+       <payloadFactory media-type="json">
+           <format>
+               {
+
+               }
+           </format>
+
+       </payloadFactory>
+		<script language="js">
+        <![CDATA[
+            var name = mc.getProperty('name');
+			var description = mc.getProperty('description');
+			var customFields = mc.getProperty('customFields');
+			var organizer = mc.getProperty('organizer');
+			var visibleTo = mc.getProperty('visibleTo');
+			
+            var payload = mc.getPayloadJSON();
+
+            if (name != "null" && name != null && name != "")
+			{
+                payload.name = name;
+            }
+			if (description != "null" && description != null && description != "")
+			{
+                payload.description = description;
+            }
+			if (customFields != "null" && customFields != null && customFields != "")
+			{
+                payload.custom_fields = customFields;
+            }
+			if (organizer != "null" && organizer != null && organizer != "")
+			{
+                payload.organizer = organizer;
+            }
+			if (visibleTo != "null" && visibleTo != null && visibleTo != "")
+			{
+                payload.visible_to = visibleTo;
+            }
+			
+            mc.setPayloadJSON(payload);
+         ]]>
+        </script>
+
+        <call>
+            <endpoint>
+                <http method="put"
+                      uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/projects/{uri.var.projectId}"/>
+            </endpoint>
+        </call>
+
+    </sequence>
+</template>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<component name="notes" type="synapse/template">
+    <subComponents>
+	
+        
+				
+		<component name="fetchNotes">
+            <file>fetchNotes.xml</file>
+            <description>This method use to retrieve all the notes existing</description>
+        </component>
+		
+		<component name="fetchNotesById">
+            <file>fetchNotesById.xml</file>
+            <description>This method use to retrieve a specific note using it unique identifier.</description>
+        </component>
+		
+		<component name="retrieveNotes">
+            <file>retrieveNotes.xml</file>
+            <description>This method use to fetch all of the notes that are accessible by the user.</description>
+        </component>
+		
+		<component name="createNotes">
+            <file>createNotes.xml</file>
+            <description>This method use to create a note.</description>
+        </component>
+		
+		<component name="updateNotesById">
+            <file>updateNotesById.xml</file>
+            <description>This method use to Update a existing note with new properties, these properties will be saved to the database and the new note will be returned..</description>
+        </component>
+		
+		<component name="deleteNotesById">
+            <file>deleteNotesById.xml</file>
+            <description>This method use to delete a existing note.</description>
+        </component>
+		
+    </subComponents>
+</component>

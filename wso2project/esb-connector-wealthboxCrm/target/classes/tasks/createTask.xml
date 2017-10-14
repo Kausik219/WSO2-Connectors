@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<template name="createTask" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="name" description="The name of the task being returned"/>
+    <parameter name="dueDate" description="The time at which the task is due"/>
+    <parameter name="description" description="A short explaination of the task being returned"/>
+    <parameter name="assignedTo" description="The id of the user who the task is assigned to"/>
+    <parameter name="complete" description="Flag to indicate whether or not the task is complete"/>
+    <parameter name="repeats" description="Flag to indicate whether or not the task repeats"/>
+    <parameter name="category" description="The category the task will belong to"/>
+    <parameter name="linkedTo" description="An array of object that are linked to this StatusUpdate"/>
+    <parameter name="priority" description="String to indicate the priority of the task you are creating"/>
+    <parameter name="visibleTo" description="The user group which is able to view the resource being created"/>
+
+    <sequence>
+        <property name="name" expression="$func:name"/>
+        <property name="dueDate" expression="$func:dueDate"/>
+        <property name="description" expression="$func:description"/>
+        <property name="assignedTo" expression="$func:assignedTo"/>
+        <property name="complete" expression="$func:complete"/>
+        <property name="repeats" expression="$func:repeats"/>
+        <property name="category" expression="$func:category"/>
+        <property name="linkedTo" expression="$func:linkedTo"/>
+        <property name="priority" expression="$func:priority"/>
+        <property name="visibleTo" expression="$func:visibleTo"/>
+
+        <payloadFactory media-type="json">
+            <format>
+                {
+
+                }
+            </format>
+
+        </payloadFactory>
+        <script language="js">
+            <![CDATA[
+            var name = mc.getProperty('name');
+			var dueDate = mc.getProperty('dueDate');
+			var description = mc.getProperty('description');
+			var assignedTo = mc.getProperty('assignedTo');
+            var complete = mc.getProperty('complete');
+			var repeats = mc.getProperty('repeats');
+			var category = mc.getProperty('category');
+			var linkedTo = mc.getProperty('linkedTo');
+			var priority = mc.getProperty('priority');
+			var visibleTo = mc.getProperty('visibleTo');
+
+            var payload = mc.getPayloadJSON();
+
+            if (name != "null" && name != null && name != "")
+			{
+                payload.name = name;
+            }
+			if (dueDate != "null" && dueDate != null && dueDate != "")
+			{
+                payload.due_date = dueDate;
+            }
+            if (description != "null" && description != null && description != "")
+			{
+                payload.description = description;
+            }
+			if (assignedTo != "null" && assignedTo != null && assignedTo != "")
+			{
+                payload.assigned_to = assignedTo;
+            }
+            if (complete != "null" && complete != null && complete != "")
+			{
+                payload.complete = complete;
+            }
+			if (repeats != "null" && repeats != null && repeats != "")
+			{
+                payload.repeats = repeats;
+            }
+			if (category != "null" && category != null && category != "")
+			{
+                payload.category = category;
+            }
+			if (linkedTo != "null" && linkedTo != null && linkedTo != "")
+			{
+                payload.linked_to = linkedTo;
+            }
+			if (priority != "null" && priority != null && priority != "")
+			{
+                payload.priority = priority;
+            }
+			if (visibleTo != "null" && visibleTo != null && visibleTo != "")
+			{
+                payload.visible_to = visibleTo;
+            }
+
+            mc.setPayloadJSON(payload);
+            ]]>
+        </script>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/tasks"/>
+            </endpoint>
+        </call>
+    </sequence>
+</template>

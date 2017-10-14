@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="createOpportunity"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.name)" name="name"/>
+		 <property expression="json-eval($.description)" name="description"/>
+		 <property expression="json-eval($.targetClose)" name="targetClose"/>
+         <property expression="json-eval($.probability)" name="probability"/>
+         <property expression="json-eval($.stage)" name="stage"/>
+         <property expression="json-eval($.manager)" name="manager"/>
+		 <property expression="json-eval($.amounts)" name="amounts"/>
+		 <property expression="json-eval($.customFields)" name="customFields"/>
+		 <property expression="json-eval($.linkedTo)" name="linkedTo"/>
+		 <property expression="json-eval($.visibleTo)" name="visibleTo"/>
+		 
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.createOpportunity>
+            <name>{$ctx:name}</name>
+			<description>{$ctx:description}</description>
+			<targetClose>{$ctx:targetClose}</targetClose>
+			<probability>{$ctx:probability}</probability>
+			<stage>{$ctx:stage}</stage>
+			<manager>{$ctx:manager}</manager>
+			<amounts>{$ctx:amounts}</amounts>
+			<customFields>{$ctx:customFields}</customFields>
+			<linkedTo>{$ctx:linkedTo}</linkedTo>
+			<visibleTo>{$ctx:visibleTo}</visibleTo>
+         </wealthboxCrm.createOpportunity>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                

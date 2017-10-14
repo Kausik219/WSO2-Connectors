@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="updateWorkflowSteps"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.workflowId)" name="workflowId"/>
+		 <property expression="json-eval($.workflowStepId)" name="workflowStepId"/>
+         <property expression="json-eval($.complete)" name="complete"/>
+		 
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.updateWorkflowSteps>
+            <workflowId>{$ctx:workflowId}</workflowId>
+            <workflowStepId>{$ctx:workflowStepId}</workflowStepId>
+			<complete>{$ctx:complete}</complete>
+         </wealthboxCrm.updateWorkflowSteps>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                

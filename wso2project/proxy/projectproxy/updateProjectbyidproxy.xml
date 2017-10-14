@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="updateProjectById"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.projectId)" name="projectId"/>
+		 <property expression="json-eval($.name)" name="name"/>
+		 <property expression="json-eval($.description)" name="description"/>
+		 <property expression="json-eval($.customFields)" name="customFields"/>
+         <property expression="json-eval($.organizer)" name="organizer"/>
+		 <property expression="json-eval($.visibleTo)" name="visibleTo"/>
+         
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.updateProjectById>
+            <projectId>{$ctx:projectId}</projectId>
+			<name>{$ctx:name}</name>
+			<description>{$ctx:description}</description>
+			<customFields>{$ctx:customFields}</customFields>
+            <organizer>{$ctx:organizer}</organizer>
+            <visibleTo>{$ctx:visibleTo}</visibleTo>
+         </wealthboxCrm.updateProjectById>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                

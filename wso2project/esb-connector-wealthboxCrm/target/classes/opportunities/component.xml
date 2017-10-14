@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<component name="opportunities" type="synapse/template">
+    <subComponents>
+	
+        <component name="createOpportunity">
+            <file>createOpportunity.xml</file>
+            <description>This method use to create a new Opportunity</description>
+        </component>
+		
+		<component name="deleteOpportunityById">
+            <file>deleteOpportunityById.xml</file>
+            <description>This method use to delete a specific Opportunity using it unique identifier.</description>
+        </component>
+				
+		<component name="fetchOpportunity">
+            <file>fetchOpportunity.xml</file>
+            <description>This method use to retrieve all the Opportunity existing</description>
+        </component>
+		
+		<component name="fetchOpportunityById">
+            <file>fetchOpportunityById.xml</file>
+            <description>This method use to retrieve a specific Opportunity using it unique identifier.</description>
+        </component>
+		
+		<component name="retrieveOpportunity">
+            <file>retrieveOpportunity.xml</file>
+            <description>This method use to retrieve all the Opportunity details</description>
+        </component>
+		
+		
+		<component name="updateOpportunityById">
+            <file>updateOpportunityById.xml</file>
+            <description>This method use to Update a specific Opportunity using it unique identifier. .</description>
+        </component>
+		
+    </subComponents>
+</component>

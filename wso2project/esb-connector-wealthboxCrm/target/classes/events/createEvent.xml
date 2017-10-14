@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<template name="createEvent" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="title" description="The name of the event being returned"/>
+	<parameter name="startsAt" description="A timestamp signifying when the event starts"/>
+	<parameter name="endsAt" description="A timestamp signifying when the event ends"/>
+	<parameter name="repeats" description="A flag to indicate whether or not the event repeats"/>
+	<parameter name="eventCategory" description="The id of the event category to which the event belongs"/>
+	<parameter name="allDay" description="A flag to indicate if the event lasts all day"/>
+	<parameter name="location" description="The description of the location the event takes place"/>
+	<parameter name="description" description="A short explaination of the event being returned"/>
+	<parameter name="state" description="The current state of the event"/>
+	<parameter name="visibleTo" description="The user group which is able to view the resource being created"/>
+	<parameter name="emailInvitees" description="A flag to indicate if the invitees should be emailed their invitation"/>
+	<parameter name="linkedTo" description="An array of object that are linked to this StatusUpdate"/>
+	<parameter name="invitees" description="An object that describes a contact or user who is visiting the site"/>
+	
+    <sequence>
+        <property name="title" expression="$func:title"/>
+		<property name="startsAt" expression="$func:startsAt"/>
+		<property name="endsAt" expression="$func:endsAt"/>
+		<property name="uri.var.repeats" expression="$func:repeats"/>
+		<property name="uri.var.eventCategory" expression="$func:eventCategory"/>
+		<property name="uri.var.allDay" expression="$func:allDay"/>
+		<property name="uri.var.location" expression="$func:location"/>
+		<property name="uri.var.description" expression="$func:description"/>
+		<property name="uri.var.state" expression="$func:state"/>
+		<property name="uri.var.visibleTo" expression="$func:visibleTo"/>
+		<property name="uri.var.emailInvitees" expression="$func:emailInvitees"/>
+		<property name="uri.var.linkedTo" expression="$func:linkedTo"/>
+		<property name="uri.var.invitees" expression="$func:invitees"/>
+		
+        <payloadFactory media-type="json">
+            <format>
+                
+
+                
+            </format>
+
+        </payloadFactory>
+        <script language="js">
+            <![CDATA[
+            var title = mc.getProperty('title');
+			var startsAt = mc.getProperty('startsAt');
+			var endsAt = mc.getProperty('endsAt');
+			var repeats = mc.getProperty('uri.var.repeats');
+			var eventCategory = mc.getProperty('uri.var.eventCategory');
+			var allDay = mc.getProperty('uri.var.allDay');
+			var location = mc.getProperty('uri.var.location');
+			var description = mc.getProperty('uri.var.description');
+			var state = mc.getProperty('uri.var.state');
+			var visibleTo = mc.getProperty('uri.var.visibleTo');
+			var emailInvitees = mc.getProperty('uri.var.emailInvitees');
+			var linkedTo = mc.getProperty('uri.var.linkedTo');
+			var invitees = mc.getProperty('uri.var.invitees');
+			
+            var payload = mc.getPayloadJSON();
+
+            if (title != "null" && title != null && title != "")
+			{
+                payload.title = title;
+            }
+			if (startsAt != "null" && startsAt != null && startsAt != "")
+			{
+                payload.starts_at = startsAt;
+            }
+			if (endsAt != "null" && endsAt != null && endsAt != "")
+			{
+                payload.ends_at = endsAt;
+            }
+			if (repeats != "null" && repeats != null && repeats != "") 
+			{
+                payload.repeats = repeats;
+            }
+			if (eventCategory != "null" && eventCategory != null && eventCategory != "") 
+			{
+                payload.event_category = eventCategory;
+            }
+			if (allDay != "null" && allDay != null && allDay != "") 
+			{
+                payload.all_day = allDay;
+            }
+			if (location != "null" && location != null && location != "") 
+			{
+                payload.location = location;
+            }
+			if (description != "null" && description != null && description != "") 
+			{
+                payload.description = description;
+            }
+			if (state != "null" && state != null && state != "") 
+			{
+                payload.state = state;
+            }
+			if (visibleTo != "null" && visibleTo != null && visibleTo != "") 
+			{
+                payload.visible_to = visibleTo;
+            }
+			if (emailInvitees != "null" && emailInvitees != null && emailInvitees != "") 
+			{
+                payload.email_invitees = emailInvitees;
+            }
+			if (linkedTo != "null" && linkedTo != null && linkedTo != "") 
+			{
+                payload.linked_to = linkedTo;
+            }
+			if (invitees != "null" && invitees != null && invitees != "") 
+			{
+                payload.invitees = invitees;
+            }
+            mc.setPayloadJSON(payload);
+            ]]>
+        </script>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/events"/>
+            </endpoint>
+        </call>
+    </sequence>
+</template>

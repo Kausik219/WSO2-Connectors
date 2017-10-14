@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+~  Copyright (c) 2016, WSO2 Inc. (http://wso2.com) All Rights Reserved.
+~
+~  WSO2 Inc. licenses this file to you under the Apache License,
+~  Version 2.0 (the "License"); you may not use this file except
+~  in compliance with the License.
+~  You may obtain a copy of the License at
+~
+~   http://www.apache.org/licenses/LICENSE-2.0
+~
+~  Unless required by applicable law or agreed to in writing,
+~  software distributed under the License is distributed on an
+~  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+~  KIND, either express or implied.  See the License for the
+~  specific language governing permissions and limitations
+~  under the License.
+-->
+<component name="tasks" type="synapse/template">
+    <subComponents>
+        <component name="createTask">
+            <file>createTask.xml</file>
+            <description>This method use to create a new task</description>
+        </component>
+        <component name="fetchtask">
+            <file>fetchtask.xml</file>
+            <description>This method use to retrieve all the tasks existing</description>
+        </component>
+		<component name="fetchTaskById">
+            <file>fetchTaskById.xml</file>
+            <description>This method use to retrieve a specific task using it unique identifier.</description>
+        </component>
+        <component name="retrieveTask">
+            <file>retrieveTask.xml</file>
+            <description>This method use to retrieve all the task details.</description>
+        </component>
+        <component name="deleteTaskById">
+            <file>deleteTaskById.xml</file>
+            <description>This method use to delete a specific task using it unique identifier.</description>
+        </component>
+        <component name="updateTaskById">
+            <file>updateTaskById.xml</file>
+            <description>This method use to Update a specific task using it unique identifier.</description>
+        </component>
+
+    </subComponents>
+</component>

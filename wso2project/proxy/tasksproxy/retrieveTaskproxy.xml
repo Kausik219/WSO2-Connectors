@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="retrieveTask"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+		 <property expression="json-eval($.resourceId)" name="resourceId"/>
+         <property expression="json-eval($.resourceType)" name="resourceType"/>
+         <property expression="json-eval($.assignedTo)" name="assignedTo"/>
+		 <property expression="json-eval($.createdBy)" name="createdBy"/>
+		 <property expression="json-eval($.completed)" name="completed"/>
+         
+		 <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+         
+		 <wealthboxCrm.retrieveTask>
+			<resourceId>{$ctx:resourceId}</resourceId>
+            <resourceType>{$ctx:resourceType}</resourceType>
+			<assignedTo>{$ctx:assignedTo}</assignedTo>
+			<createdBy>{$ctx:createdBy}</createdBy>
+			<completed>{$ctx:completed}</completed>
+		 </wealthboxCrm.retrieveTask>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+     

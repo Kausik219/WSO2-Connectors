@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2016, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+   http://www.apache.org/licenses/LICENSE-2.0
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied.  See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<template name="createOpportunity" xmlns="http://ws.apache.org/ns/synapse">
+    <parameter name="name" description="The name of the Opportunity being returned"/>
+	<parameter name="description" description="A short explaination of the opportunity being returned"/>
+	<parameter name="targetClose" description="A string representing the date/time when the opportunity should close"/>
+	<parameter name="probability" description="A number representing the chance the opportunity will close, as a percentage"/>
+	<parameter name="stage" description="A string representing the current stage the opportunity finds itself in"/>
+	<parameter name="manager" description="The name of the person who is designated as manager of this opportunity"/>
+	<parameter name="amounts" description="An array of the amounts associated with the opportunity"/>
+	<parameter name="customFields" description="An array of the custom fields that are to be set on this object"/>
+	<parameter name="linkedTo" description="An array of object that are linked to this StatusUpdate"/>
+	<parameter name="visibleTo" description="The user group which is able to view the resource being created"/>
+	
+	
+    <sequence>
+        <property name="name" expression="$func:name"/>
+		<property name="description" expression="$func:description"/>
+		<property name="targetClose" expression="$func:targetClose"/>
+		<property name="probability" expression="$func:probability"/>
+		<property name="stage" expression="$func:stage"/>
+		<property name="manager" expression="$func:manager"/>
+		<property name="amounts" expression="$func:amounts"/>
+		<property name="customFields" expression="$func:customFields"/>
+		<property name="linkedTo" expression="$func:linkedTo"/>
+		<property name="visibleTo" expression="$func:visibleTo"/>
+		
+        <payloadFactory media-type="json">
+            <format>
+                {
+
+                }
+            </format>
+
+        </payloadFactory>
+        <script language="js">
+            <![CDATA[
+            var name = mc.getProperty('name');
+			var description = mc.getProperty('description');
+			var targetClose = mc.getProperty('targetClose');
+			var probability = mc.getProperty('probability');
+			var stage = mc.getProperty('stage');
+			var manager = mc.getProperty('manager');
+			var amounts = mc.getProperty('amounts');
+			var customFields = mc.getProperty('customFields');
+			var linkedTo = mc.getProperty('linkedTo');
+			var visibleTo = mc.getProperty('visibleTo');
+			
+
+            var payload = mc.getPayloadJSON();
+
+            if (name != "null" && name != null && name != "")
+			{
+                payload.name = name;
+            }
+			if (description != "null" && description != null && description != "")
+			{
+                payload.description = description;
+            }
+			if (targetClose != "null" && targetClose != null && targetClose != "")
+			{
+                payload.target_close = targetClose;
+            }
+			if (probability != "null" && probability != null && probability != "")
+			{
+                payload.probability = probability;
+            }
+			if (targetClose != "null" && targetClose != null && targetClose != "")
+			{
+                payload.target_close = targetClose;
+            }
+			if (stage != "null" && stage != null && stage != "")
+			{
+                payload.stage = stage;
+            }
+			if (manager != "null" && manager != null && manager != "")
+			{
+                payload.manager = manager;
+            }
+			if (amounts != "null" && amounts != null && amounts != "")
+			{
+                payload.amounts = amounts;
+            }
+			if (customFields != "null" && customFields != null && customFields != "")
+			{
+                payload.custom_fields = customFields;
+            }
+			if (linkedTo != "null" && linkedTo != null && linkedTo != "")
+			{
+                payload.linked_to = linkedTo;
+            }
+			if (visibleTo != "null" && visibleTo != null && visibleTo != "")
+			{
+                payload.visible_to = visibleTo;
+            }
+			
+            mc.setPayloadJSON(payload);
+            ]]>
+        </script>
+
+        <call>
+            <endpoint>
+                <http method="post"
+                      uri-template="{uri.var.apiUrl}/{uri.var.apiVersion}/opportunities"/>
+            </endpoint>
+        </call>
+    </sequence>
+</template>

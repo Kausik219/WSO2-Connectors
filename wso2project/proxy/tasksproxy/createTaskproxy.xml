@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="createTask"
+       startOnLoad="true"
+       statistics="disable"
+       trace="disable"
+       transports="http,https">
+   <target>
+      <inSequence>
+         <property expression="json-eval($.apiUrl)" name="apiUrl"/>
+         <property expression="json-eval($.accessToken)" name="accessToken"/>
+         <property expression="json-eval($.apiVersion)" name="apiVersion"/>
+         <property expression="json-eval($.name)" name="name"/>
+		 <property expression="json-eval($.dueDate)" name="dueDate"/>
+		 <property expression="json-eval($.description)" name="description"/>
+		 <property expression="json-eval($.assignedTo)" name="assignedTo"/>
+		 <property expression="json-eval($.complete)" name="complete"/>
+		 <property expression="json-eval($.repeats)" name="repeats"/>
+		 <property expression="json-eval($.category)" name="category"/>
+		 <property expression="json-eval($.linkedTo)" name="linkedTo"/>
+		 <property expression="json-eval($.priority)" name="priority"/>
+		 <property expression="json-eval($.visibleTo)" name="visibleTo"/>
+		 
+         <wealthboxCrm.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+            <apiVersion>{$ctx:apiVersion}</apiVersion>
+         </wealthboxCrm.init>
+		 
+         <wealthboxCrm.createTask>
+            <name>{$ctx:name}</name>
+			<dueDate>{$ctx:dueDate}</dueDate>
+			<description>{$ctx:description}</description>
+			<assignedTo>{$ctx:assignedTo}</assignedTo>
+			<complete>{$ctx:complete}</complete>
+			<repeats>{$ctx:repeats}</repeats>
+			<category>{$ctx:category}</category>
+			<linkedTo>{$ctx:linkedTo}</linkedTo>
+			<priority>{$ctx:priority}</priority>
+			<visibleTo>{$ctx:visibleTo}</visibleTo>
+         </wealthboxCrm.createTask>
+		 
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <parameter name="serviceType">proxy</parameter>
+   <description/>
+</proxy>
+                                
+
+		
+		
